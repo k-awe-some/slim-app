@@ -4,8 +4,10 @@ include 'bootstrap.php';
 
 use Chatter\Models\Message;
 use Chatter\Middlewares\Logging as ChatterLogging;
+use Chatter\Middlewares\Authentication as ChatterAuth;
 
 $app = new \Slim\App();
+$app->add(new ChatterAuth());
 $app->add(new ChatterLogging());
 
 $app->get('/messages', function ($request, $response, $args) {
