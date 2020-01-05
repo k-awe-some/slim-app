@@ -3,8 +3,10 @@ require 'vendor/autoload.php';
 include 'bootstrap.php';
 
 use Chatter\Models\Message;
+use Chatter\Middlewares\Logging as ChatterLogging;
 
 $app = new \Slim\App();
+$app->add(new ChatterLogging());
 
 $app->get('/messages', function ($request, $response, $args) {
     $_message = new Message();
