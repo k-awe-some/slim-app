@@ -41,4 +41,15 @@ $app->post('/messages', function ($request, $response, $args) {
     }
 });
 
+$app->delete('/messages/{message_id}', function ($request, $response, $args) {
+    $message = Message::find($args['message_id']);
+    $message->delete();
+
+    if ($message->exists) {
+        return $response->withStatus(400);
+    } else {
+        return $response->withStatus(204);
+    }
+});
+
 $app->run();
